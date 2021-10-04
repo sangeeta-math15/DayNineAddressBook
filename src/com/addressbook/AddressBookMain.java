@@ -1,6 +1,7 @@
 package com.addressbook;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * AddressBook System
@@ -9,31 +10,112 @@ import java.util.Scanner;
  *
  */
 
-public class AddressBookMain {
-	private static String lastName;
-	private static String firstName;
-	private static String city;
-	private static String state;
-	private static String phNo;
-	private static int zip;
+class Person {
+	String firstName;
+	String lastName;
+	String city, state;
+	int zip;
+	int phNo;
 
-	public static void main(String[] args) {
-		System.out.println("Welcome to Address Book Program in AddressBookMain class on Master Branch");
-		System.out.println("Enter Your First Name");
-		Scanner scanner = new Scanner(System.in);
-		firstName = scanner.nextLine();
-		System.out.println("Enter Your Last Name");
-		lastName = scanner.nextLine();
-		System.out.println("Enter Your city Name");
-		city = scanner.nextLine();
-		System.out.println("Enter Your state Name");
-		state = scanner.nextLine();
-		System.out.println("Enter Your phone Number");
-		phNo = scanner.nextLine();
-		System.out.println("Enter Your zip");
-		zip = scanner.nextInt();
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public int getZip() {
+		return zip;
+	}
+
+	public void setZip(int zip) {
+		this.zip = zip;
+	}
+
+	public int getPhNo() {
+		return phNo;
+	}
+
+	public void setPhNo(int phNo) {
+		this.phNo = phNo;
+	}
+
+	public String toString() {
+		return "\n firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", city='" + city + '\''
+				+ ", state='" + state + '\'' + ", zip=" + zip + ", phNo='" + phNo + '\'';
+	}
+}
+
+class PersonMethods extends Person {
+	Scanner sc = new Scanner(System.in);
+	ArrayList<Person> person = new ArrayList<>();
+
+	public void createPerson() {
+		Person person1 = new Person();
+		System.out.println("Enter your First Name");
+		person1.firstName = sc.nextLine();
+		System.out.println("Enter your Last Name");
+		person1.lastName = sc.nextLine();
+		System.out.println("Enter your City");
+		person1.city = sc.nextLine();
+		System.out.println("Enter your state");
+		person1.state = sc.nextLine();
+		System.out.println("Enter your Zip");
+		person1.zip = sc.nextInt();
+		System.out.println("Enter your Phone Number");
+		person1.phNo = sc.nextInt();
 		System.out.println("Added Successfully");
+		person.add(person1);
+	}
 
+}
+
+public class AddressBookMain {
+	public static void main(String args[]) {
+		int choice = 1, person_count, i;
+		Scanner s = new Scanner(System.in);
+		PersonMethods personmethods = new PersonMethods();
+		while (choice != 0) {
+			System.out.println("1.Add Person\n");
+			System.out.println("Enter your choice:");
+			choice = s.nextInt();
+			switch (choice) {
+			case 1:
+				System.out.println("Enter Number of persons:");
+				person_count = s.nextInt();
+				for (i = 0; i < person_count; i++) {
+					personmethods.createPerson();
+				}
+				break;
+			default:
+				break;
+			}
+		}
 	}
 
 }
