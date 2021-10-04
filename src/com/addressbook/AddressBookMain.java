@@ -91,6 +91,47 @@ class PersonMethods extends Person {
 		person1.phNo = sc.nextInt();
 		System.out.println("Added Successfully");
 		person.add(person1);
+
+	}
+
+	public void UpdatePerson(String name, String update) {
+
+		int flag = 0;
+		for (Person p : person) {
+			if (p.firstName.equals(name)) {
+				flag = 1;
+				switch (update) {
+				case "city":
+					System.out.println("Enter city name to update:");
+					p.city = sc.nextLine();
+					break;
+				case "state":
+					System.out.println("Enter state name to update:");
+					p.state = sc.nextLine();
+					break;
+				case "phone":
+					System.out.println("Enter phone number to update:");
+					p.phNo = sc.nextInt();
+					break;
+				case "zip":
+					System.out.println("Enter Your zip");
+					p.zip = sc.nextInt();
+					break;
+				}
+			}
+		}
+		if (flag == 0)
+			System.out.println("Person Not Found");
+		else
+			System.out.println("Updated Successfully");
+
+	}
+
+	public void viewPerson() {
+		for (Person p : person) {
+			System.out.println(p);
+		}
+
 	}
 
 }
@@ -101,7 +142,7 @@ public class AddressBookMain {
 		Scanner s = new Scanner(System.in);
 		PersonMethods personmethods = new PersonMethods();
 		while (choice != 0) {
-			System.out.println("1.Add Person\n");
+			System.out.println("1.Add Person\n2.Edit Person\n3.Display Person");
 			System.out.println("Enter your choice:");
 			choice = s.nextInt();
 			switch (choice) {
@@ -111,6 +152,16 @@ public class AddressBookMain {
 				for (i = 0; i < person_count; i++) {
 					personmethods.createPerson();
 				}
+				break;
+			case 2:
+				System.out.println("Enter name of person to Update");
+				String name = s.next();
+				System.out.println("Enter what to update(city/state/phone/zip):");
+				String update = s.next();
+				personmethods.UpdatePerson(name, update);
+				break;
+			case 3:
+				personmethods.viewPerson();
 				break;
 			default:
 				break;
