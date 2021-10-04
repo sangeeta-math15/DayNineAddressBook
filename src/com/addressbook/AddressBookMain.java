@@ -2,6 +2,7 @@ package com.addressbook;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * AddressBook System
@@ -134,6 +135,25 @@ class PersonMethods extends Person {
 
 	}
 
+	public void DeletePerson(String n) {
+		int flag = 0;
+		Iterator<Person> itr = person.iterator();
+		while (itr.hasNext()) {
+			Person person = itr.next();
+			if (person.firstName.equals(n)) {
+				flag = 1;
+				itr.remove();
+
+			}
+			if (flag == 0)
+
+				System.out.println("Person Not found");
+			else
+				System.out.println("Deleted Person");
+
+		}
+	}
+
 }
 
 public class AddressBookMain {
@@ -142,7 +162,7 @@ public class AddressBookMain {
 		Scanner s = new Scanner(System.in);
 		PersonMethods personmethods = new PersonMethods();
 		while (choice != 0) {
-			System.out.println("1.Add Person\n2.Edit Person\n3.Display Person");
+			System.out.println("1.Add Person\n2.Edit Person\n3.Delete Person\n4.Display Person");
 			System.out.println("Enter your choice:");
 			choice = s.nextInt();
 			switch (choice) {
@@ -161,6 +181,11 @@ public class AddressBookMain {
 				personmethods.UpdatePerson(name, update);
 				break;
 			case 3:
+				System.out.println("Enter name of person to Delete");
+				String n = s.next();
+				personmethods.DeletePerson(n);
+				break;
+			case 4:
 				personmethods.viewPerson();
 				break;
 			default:
